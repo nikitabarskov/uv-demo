@@ -1,0 +1,55 @@
+[project]
+name = "nikitabarskov-uv-demo"
+dependencies = [
+    "grpcio~=1.60.1",
+    "protobuf~=4.25.2",
+    "googleapis-common-protos~=1.62.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "mypy>=1",
+    "ruff>=0",
+    "grpc-stubs>=1",
+    "types-protobuf>=4",
+]
+
+[tool.mypy]
+strict = true
+strict_optional = true
+incremental = false
+namespace_packages = true
+explicit_package_bases = true
+mypy_path = [
+    "src",
+    "tests"
+]
+plugins = [
+    "pydantic.mypy",
+]
+
+[tool.ruff.lint]
+select = [
+    "F", # https://beta.ruff.rs/docs/rules/#pyflakes-f
+    "W", # https://beta.ruff.rs/docs/rules/#warning-w
+    "E", # https://beta.ruff.rs/docs/rules/#error-e
+    "I", # https://beta.ruff.rs/docs/rules/#isort-i
+    "N", # https://beta.ruff.rs/docs/rules/#pep8-naming-n
+    "ANN", # https://beta.ruff.rs/docs/rules/#flake8-annotations-ann
+    "B", # https://beta.ruff.rs/docs/rules/#flake8-bugbear-b
+    "RUF", # https://beta.ruff.rs/docs/rules/#ruff-specific-rules-ruf
+    "PT", # https://beta.ruff.rs/docs/rules/#flake8-pytest-style-pt
+]
+fixable = [
+    "ALL",
+]
+exclude = [
+    ".mypy_cache",
+    ".ruff_cache",
+    ".venv",
+    "__pypackages__",
+]
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
